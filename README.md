@@ -26,7 +26,11 @@ import FrameworkTestUI
 @main
 struct MyApp: App {
  init() {
-     FrameworkTestUIInitializer.initialize(apiKey: "TU_API_KEY_AQUÍ")
+    do {
+        try FrameworkTestUIInitializer.shared.initialize(apiKey: "TU_API_KEY_AQUÍ")
+    } catch {
+        print("Error initialize FrameworkUI: \(error.localizedDescription)")
+    }
  }
 
  var body: some Scene {
