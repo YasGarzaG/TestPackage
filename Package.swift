@@ -5,17 +5,32 @@ import PackageDescription
 
 let package = Package(
     name: "TestPackage",
+    platforms: [
+        .iOS(.v13)
+    ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
+        // Producto binario para FrameworkApi
         .library(
-            name: "TestPackage",
-            targets: ["TestPackage"]),
+            name: "FrameworkTestApi",
+            targets: ["FrameworkTestApi"]
+        ),
+        // Producto binario para FrameworkUI que depende de FrameworkApi
+        .library(
+            name: "FrameworkTestUI",
+            targets: ["FrameworkTestUI"]
+        )
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "TestPackage"),
-
+        .binaryTarget(
+            name: "FrameworkTestApi",
+            url: "https://github.com/YasGarzaG/FrameworkTestApi/releases/download/v1.0.0/FrameworkTestApi.xcframework.zip",
+            checksum: "52c5ecb1688ddbb8a3338c376183371c5a7b3df057d8971927d93fbf35ec81b5"
+        ),
+        .binaryTarget(
+            name: "FrameworkTestUI",
+            url: "https://github.com/YasGarzaG/FrameworkTestUI/releases/download/v1.0.0/FrameworkTestUI.xcframework.zip",
+            checksum: "72fb1735ef346ccbad4c8d7143624c0a1d1f3a461af9067cde6a3ec62a4d38de"
+        )
     ]
 )
+
